@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <h1>Sistema Registro</h1>
+        </div>
+        <br>
+        <div class="card-deck">
+            <div class="card border-primary mb-3" style="max-width: 180rem;">
+                <div class="card-header">Lender</div>
+                <div class="card-body">
+                    {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                        <li>{{message}}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    <form action="registro" method="POST">
+                        {% csrf_token %}
+                        <input hidden name="rol" id="rol" value="1">
+                        <fieldset>
+                            <label for="nombre">First Name:</label>
+                            <input type="text" name="nombre" id="nombre">
+                        </fieldset>
+                        <fieldset>
+                            <label for="apellido">Last Name:</label>
+                            <input type="text" name="apellido" id="apellido">
+                        </fieldset>
+                        <fieldset>
+                            <label for="email">Email:</label>
+                            <input type="text" name="email" id="email">
+                        </fieldset>
+                        <fieldset>
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" value="12345678">
+                        </fieldset>
+                        <fieldset>
+                            <label for="password2">Confirmar Password:</label>
+                            <input type="password" name="password2" id="password2" value="12345678">
+                        </fieldset>
+                        <fieldset>
+                            <label for="money">Money:</label>
+                            <input type="number" name="money" id="money">
+                        </fieldset>
+                        <a href="/">Al ready a member?</a>
+                        <button class="btn">Register</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card border-primary mb-3" style="max-width: 180rem;">
+                <div class="card-header">Borrower</div>
+                <div class="card-body">
+                    {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                        <li>{{message}}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    <form action="registro" method="POST">
+                        {% csrf_token %}
+                        <input hidden name="rol" id="rol" value="2">
+                        <fieldset>
+                            <label for="nombre">First Name:</label>
+                            <input type="text" name="nombre" id="nombre">
+                        </fieldset>
+                        <fieldset>
+                            <label for="apellido">Last Name:</label>
+                            <input type="text" name="apellido" id="apellido">
+                        </fieldset>
+                        <fieldset>
+                            <label for="email">Email:</label>
+                            <input type="text" name="email" id="email">
+                        </fieldset>
+                        <fieldset>
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" value="12345678">
+                        </fieldset>
+                        <fieldset>
+                            <label for="password2">Confirmar Password:</label>
+                            <input type="password" name="password2" id="password2" value="12345678">
+                        </fieldset>
+                        <fieldset>
+                            <label for="need_for">Need Money for:</label>
+                            <input type="text" name="need_for" id="need_for">
+                        </fieldset>
+                        <fieldset>
+                            <label for="desc_for">Description:</label><br>
+                            <textarea cols="60" rows="6" maxlength="80" name="desc_for" id="desc_for"></textarea>
+                        </fieldset>
+                        <fieldset>
+                            <label for="money_need">Money:</label>
+                            <input type="number" name="money_need" id="money_need">
+                        </fieldset>
+                        <a href="/">Al ready a member?</a>
+                        <button class="btn">Register</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
