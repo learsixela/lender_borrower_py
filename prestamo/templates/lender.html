@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="wrapper">
+    {% include "navbar.html" %}
+        <div class="header">
+            <h5>Nombre: {{active_user.nombre}} {{active_user.apellido}}</h5>
+            <br>
+            <h5>Account Balance: {{active_user.money}}</h5><br>
+        </div>
+        <br>
+        <div class="content">
+
+            <h4> List of people who are in need of help:</h4>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Money Need For</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Amount Needed</th>
+                    <th scope="col">Amount Raise</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for reg in borrowers %}
+                    <tr>
+                        <td>{{reg.id}}</td>
+                        <td scope="row">{{reg.nombre}}</td>
+                        <td scope="row">{{reg.need_for}}</td>
+                        <td scope="row">{{reg.desc_for}}</td>
+                        <td scope="row">{{reg.money_need}}</td>
+                        <td scope="row">{{reg.money}}</td>
+
+                        <td>
+                            <form action="lend" method="POST">
+                                {% csrf_token %}
+                                <input type="number" name="prestamo" value="0">
+                                <input type="hidden" name="borrower" value="{{reg.id}}">
+                                <button class="btn">lend</button>
+
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br>
+        <h4> List of people lent money to:</h4>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Money Need For</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Amount Needed</th>
+                    <th scope="col">Amount Raise</th>
+                    <th scope="col">Amount Lent</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for reg in mi_borrower %}
+                    <tr>
+                        <td scope="row">{{reg.borrow.nombre}} {{reg.borrow.apellido}}</td>
+                        <td scope="row">{{reg.borrow.need_for}}</td>
+                        <td scope="row">{{reg.borrow.desc_for}}</td>
+                        <td scope="row">{{reg.borrow.money_need}}</td>
+                        <td scope="row">{{reg.borrow.money}}</td>
+                        <td scope="row">{{reg.lender.monto_prestamo}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

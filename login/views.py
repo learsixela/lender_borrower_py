@@ -21,7 +21,7 @@ def inicio(request):
         return redirect('/')
     else:
         request.session['user_id'] = usuario[0].id
-        return redirect('/sistemas')
+        return redirect('/prestamos')
 
 def registro(request):
     #validacion de parametros
@@ -60,7 +60,7 @@ def registro(request):
                 money=0,
             )
         request.session['user_id'] = user.id
-    return redirect('/')
+    return redirect('/prestamos')
 
 def logout(request):
     request.session.flush()
